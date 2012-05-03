@@ -1,0 +1,140 @@
+/* 
+    Document   : calendar
+    Created on : Feb 20, 2012, 4:12:24 PM
+    Author     : Darren Pavel <darren.pavel@gmail.com>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* Structure */
+.back a span {
+    vertical-align: 9px;
+}
+
+.events {
+    display: block;
+    width: 100%;
+    margin: 2px 0px;
+    padding: 5px 0px;
+}
+
+.current {
+    vertical-align: 15px;
+}
+
+.title {
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.previous, .current, .next {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+/* Typography & Colors */
+.back a {
+    display: block;
+    height: 30px;
+    font-size: 1.15em;
+    font-variant: small-caps;
+    margin-bottom: 20px;
+}
+
+.events h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.events .times {
+    font-size: 0.9em;
+}
+
+.current {
+    font-size: 2em;
+}
+
+.calendar .red {
+    background-color: #F62817;
+}
+
+.calendar .blue {
+    background-color: #1589FF;
+}
+
+.yellow {
+    background-color: #eee600;
+}
+
+.aqua {
+    background-color: #00cc99;
+}
+
+.pink {
+    background-color: #ff1493;
+}
+
+.light_purple {
+    background-color: #9457eb;
+}
+
+.brown {
+    background-color: #836953;
+}
+
+.light_blue {
+    background-color: #5b92e5;
+}
+
+/* Headers */
+
+/* Content */
+
+/* Footers */
+
+/* Images */
+.back img {
+    height: 30px;
+}
+
+/* Form Elements */
+.cal_label {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 1px;
+}
+
+.calendar.form .radio label {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    padding: 1px;
+    margin: 0px;
+}
+
+.radio label.selected {
+    background-color: #f5f5f5;
+    border: 1px solid #766a62;
+    width: 32px;
+    height: 32px;
+}
+
+/* Comments */
+
+/* Sidebar */
+
+/* Common Elements */
+
+/* List */
+
+/* Table */
+.table .calendar td {
+    padding: 3px 0px;
+    position: relative;
+    vertical-align: top;
+}
+
+.table .calendar th {
+    width: 14%;
+}

@@ -1,0 +1,44 @@
+/* 
+    Document   : contact
+    Created on : Nov 27, 2011, 1:30:22 PM
+    Author     : ashleypavel
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#content {
+    margin: 40px 40px 20px;
+}
+
+.column {
+    width: 400px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.column li {
+    margin-bottom: 20px;
+    font-size: 1.2em
+}
+
+.column li img {
+    float: left;
+    height: 3em;
+}
+
+.column li .title {
+    font-size: 1.5em;
+    font-variant: small-caps;
+}
+
