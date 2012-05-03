@@ -4,7 +4,7 @@
             <?php
             echo $this->Html->link('About Saint Michael & All Angels', array('controller' => 'newsletters', 'action' => 'index'));
             echo $this->Html->nestedList(array(
-                $this->Html->link('Staff', array('controller' => 'staff', 'action' => 'index')), 
+                $this->Html->link('Clergy', array('controller' => 'staff', 'action' => 'index')), 
                 $this->Html->link('Vestry', array('controller' => 'vestries', 'action' => 'index')),
                 $this->Html->link('Newsletter', array('controller' => 'newsletters', 'action' => 'index')),
                 $this->Html->link('Minutes and Reports', array('controller' => 'reports', 'action' => 'index')),
@@ -51,7 +51,7 @@
             echo $this->Html->nestedList(array(
                 $this->Html->link('Worship Schedules', array('controller' => 'services', 'action' => 'index')),
                 $this->Html->link('Events', array('controller' => 'calendars', 'action' => 'index')),
-                $this->Html->link('Episcopal Links', ''),
+                $this->Html->link('Episcopal Links', array('controller' => 'links', 'action' => 'index'))
             ));
             ?>
         </li>

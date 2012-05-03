@@ -32,4 +32,8 @@ class AppController extends Controller {
         
         parent::beforeFilter();
     }
+    
+    /**
+     * @TODO: Restrict access for other user types than 'admin' 
+     */
 }

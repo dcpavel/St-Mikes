@@ -1,2 +1,2 @@
-1336023194
-a:1:{s:4:"name";a:2:{i:129986563;s:17:"`dpavel_st_mikes`";i:-513120876;s:7:"`users`";}}
+1336025773
+a:2:{s:4:"name";a:12:{i:129986563;s:17:"`dpavel_st_mikes`";i:-8503171;s:12:"`Staff`.`id`";i:-267755040;s:18:"`Staff`.`position`";i:1972038241;s:14:"`Staff`.`name`";i:652943478;s:7:"`staff`";i:-1552977325;s:8:"`status`";i:558310720;s:7:"`Staff`";i:1198939709;s:17:"`Staff`.`picture`";i:620719151;s:21:"`Staff`.`description`";i:1458221022;s:16:"`Staff`.`status`";i:369932543;s:17:"`Staff`.`created`";i:-492515528;s:18:"`Staff`.`modified`";}s:6:"fields";a:2:{s:32:"b96ad71eae6b11e54f41e54e97908841";a:3:{i:0;s:12:"`Staff`.`id`";i:1;s:18:"`Staff`.`position`";i:2;s:14:"`Staff`.`name`";}s:32:"73acece248369b79ce6ec282f0744152";a:8:{i:0;s:12:"`Staff`.`id`";i:1;s:18:"`Staff`.`position`";i:2;s:17:"`Staff`.`picture`";i:3;s:14:"`Staff`.`name`";i:4;s:21:"`Staff`.`description`";i:5;s:16:"`Staff`.`status`";i:6;s:17:"`Staff`.`created`";i:7;s:18:"`Staff`.`modified`";}}}

@@ -26,6 +26,24 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+    
+    
+/**
+ * Custom routes 
+ */
+
+    Router::connect('/clergy/:action/*', array('controller' => 'staff'));
+    
+    Router::connect('/music/:action/*', array('controller' => 'choirs'));
+    
+    Router::connect('/holydays/:action/*', array('controller' => 'holidays'));
+    
+    Router::connect('/education/:action/*', array('controller' => 'lessons'));
+    
+    Router::connect('/communication/:action/*', array('controller' => 'libraries'));
+    
+    Router::connect('/evangilism/:action/*', array('controller' => 'evangilisms'));
+    
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -57,9 +75,3 @@
  * the built-in default routes.
  */
 	require CAKE . 'Config' . DS . 'routes.php';
-
-        Router::connect('/clergy/*', array('controller' => 'staff', 'action' => 'view'));
-        
-        Router::connect('/music/*', array('controller' => 'choirs', 'action' => 'view'));
-        
-        Router::connect('/holydays/*', array('controller' => 'holidays', 'action' => 'view'));
