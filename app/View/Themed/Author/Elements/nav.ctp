@@ -3,27 +3,19 @@
         <li class="purple">
             <?php
             echo $this->Html->link(
-                    'Users',
-                    array(
-                        'controller' => 'users',
-                        'action' => 'index',
-                        'admin' => true
-                        )
-                    );
-            echo $this->Html->nestedList(array(
-                $this->Html->link(
                         'Clergy',
                         array(
                             'controller' => 'staff',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
-                        ), 
+                        );
+            echo $this->Html->nestedList(array(
                 $this->Html->link(
                         'Vestry', array(
                             'controller' => 'vestries',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         )
             ));
@@ -36,7 +28,7 @@
                     array(
                         'controller' => 'newsletters',
                         'action' => 'index',
-                        'admin' => true
+                        'author' => true
                     )
                 );
             echo $this->Html->nestedList(array(
@@ -44,7 +36,7 @@
                         'Minutes and Reports', array(
                             'controller' => 'reports',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -52,7 +44,7 @@
                         array(
                             'controller' => 'finances',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -67,7 +59,7 @@
                         array(
                             'controller' => 'choirs',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -75,7 +67,7 @@
                         array(
                             'controller' => 'lessons',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
             ));
@@ -88,7 +80,7 @@
                     array(
                         'controller' => 'ministries',
                         'action' => 'index',
-                        'admin' => true
+                        'author' => true
                     )
                 );
             echo $this->Html->nestedList(array(
@@ -104,7 +96,7 @@
                         array(
                             'controller' => 'libraries',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -112,7 +104,7 @@
                         array(
                             'controller' => 'grounds',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -120,7 +112,7 @@
                         array(
                             'controller' => 'evangalisms',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
             ));
@@ -133,7 +125,7 @@
                     array(
                         'controller' => 'calendars',
                         'action' => 'index',
-                        'admin' => true
+                        'author' => true
                     ));
             echo $this->Html->nestedList(array(
                 $this->Html->link(
@@ -141,7 +133,7 @@
                         array(
                             'controller' => 'services',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -156,7 +148,7 @@
                         array(
                             'controller' => 'links',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -164,7 +156,7 @@
                         array(
                             'controller' => 'missions',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),
                 $this->Html->link(
@@ -172,7 +164,7 @@
                         array(
                             'controller' => 'fellowships',
                             'action' => 'index',
-                            'admin' => true
+                            'author' => true
                             )
                         ),  
             ));

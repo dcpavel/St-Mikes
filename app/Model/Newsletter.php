@@ -19,9 +19,10 @@ class Newsletter extends AppModel {
         )
     );
     
+    /**
+     * Upload files if one has been selected to upload
+     */
     public function beforeSave($options = array()) {
-        parent::beforeSave($options);
-        
         if ($this->data[$this->alias]['filename']['size'] !== 0) {
             if ($this->exists() && $current = $this->field('file')) {
                 $this->deleteExistingFile($this->field('file'), 'files/Newsletters');
@@ -32,9 +33,14 @@ class Newsletter extends AppModel {
             $this->data[$this->alias]['file'] = $name;
         }
         
-        return true;
+        return parent::beforeSave($options);
     }
     
+    /**
+     * A list of the active newsletters ordered by date
+     * 
+     * @return array 
+     */
     public function newsletterList() {
         $newsletters = $this->find('list', array(
             'fields' => array(
@@ -55,14 +61,57 @@ class Newsletter extends AppModel {
         return $newsletters;
     }
     
-    public function lastId() {
-        return $this->field('id', array(
-            'conditions' => array(
-                'Newsletter.status' => true
-            ),
-            'order' => array(
-                'Newsletter.date' => 'DESC'
-            )
-        ));
+    /**
+     * Construct the appropriate options for pagination or find
+     * 
+     * @param array $search The POST data for use in a search
+     * @return array Options containing conditions and order
+     */
+    public function searchOptions($search) {
+        $term = trim($search['Search']);
+        $options = array();
+        
+        if ($search['Category'] === 'date') {
+            $options = array(
+                'conditions' => $this->dateSearch($term),
+                'order' => array(
+                    'Newsletter.date' => 'ASC'
+                )
+            );
+        } elseif ($search['Category'] === 'title') {
+            $options = array(
+                'conditions' => array(
+                    'Newsletter.title LIKE' => "%$term%"
+                ),
+                'order' => array(
+                    'Newsletter.title' => 'ASC'
+                )
+            );
+        } elseif ($search['Category'] === 'filename') {
+            $options = array(
+                'conditions' => array(
+                    'Newsletter.file LIKE' => "%$term%"
+                ),
+                'order' => array(
+                    'Newsletter.file' => 'ASC'
+                )
+            );
+        } else {
+            $dateSearch = $this->dateSearch($term, false);
+            $options = array(
+                'conditions' => array(
+                    'OR' => array(
+                        $dateSearch,
+                        'Newsletter.title LIKE' => "%$term%",
+                        'Newsletter.file LIKE' => "%$term%"
+                    )
+                ),
+                'order' => array(
+                    'Newsletter.date' => 'ASC'
+                )
+            );
+        }
+        
+        return $options;
     }
 }

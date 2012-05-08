@@ -90,7 +90,9 @@ class UsersController extends AppController {
         if ($this->request->is('get')) {
             $this->recursive = 0;
             $this->request->data = $this->User->findById($id);
-            unset($this->request->data['User']['password']);
+            if (isset($this->request->data['User']['password'])) {
+                unset($this->request->data['User']['password']);
+            }
         } else {
             if (!empty($this->request->data['User']['id']) && empty($this->request->data['User']['password'])) {
                 unset($this->request->data['User']['password']);

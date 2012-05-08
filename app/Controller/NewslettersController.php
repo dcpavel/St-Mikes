@@ -63,53 +63,7 @@ class NewslettersController extends AppController {
         $this->Newsletter->recursive = 0;
         
         if (!$this->request->is('get')) {
-            $search = $this->request->data['Newsletter']['Search'];
-            
-            $date = $search;
-            $date_type = 'DAY';
-            if (preg_match('/([A-Z]+)/i', $search, $matches)) {
-                $date = date('m', strtotime($matches[0]));
-                $date_type = 'MONTH';
-            } elseif (preg_match('/\d{4}/', $search, $matches)) {
-                $date = $matches[0];
-                $date_type = 'YEAR';
-            }
-            
-            $options = array(
-                'conditions' => array(
-                    'OR' => array(
-                        "$date_type(Newsletter.date)" => $date,
-                        'Newsletter.title LIKE' => "%$search%",
-                        'Newsletter.file LIKE' => "%$search%"
-                    )
-                )
-            );
-            
-            switch ($this->request->data['Newsletter']['Category']) {
-                case 'date':
-                    $options = array(
-                        'conditions' => array(
-                            "$date_type(Newsletter.date)" => $date
-                        )
-                    );
-                    break;
-                case 'title':
-                    $options = array(
-                        'conditions' => array(
-                            "Newsletter.title LIKE" => "%$search%"
-                        )
-                    );
-                    break;
-                case 'filename':
-                    $options = array(
-                        'conditions' => array(
-                            "Newsletter.file LIKE" => "%$search%"
-                        )
-                    );
-                    break;
-            }
-            
-            $this->paginate = $options;
+            $this->paginate = $this->Newsletter->searchOptions($this->request->data['Newsletter']);
         }
         
         $this->set(array(
@@ -143,5 +97,9 @@ class NewslettersController extends AppController {
         }
         
         $this->redirect($this->referer());
+    }
+    
+    public function uploader_index() {
+        
     }
 }

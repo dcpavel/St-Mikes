@@ -26,14 +26,24 @@ class User extends AppModel {
         )
     );
     
+    /**
+     * Make sure that passwords are hashed
+     * 
+     * @return boolean 
+     */
     public function beforeSave() {
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
         }
         
-        return true;
+        return parent::beforeSave();
     }
     
+    /**
+     * List of roles that a user can be
+     * 
+     * @return array
+     */
     public function roles() {
         return array(
             'admin' => 'Administrator (full access)',

@@ -44,6 +44,8 @@
     
     Router::connect('/evangilism/:action/*', array('controller' => 'evangilisms'));
     
+    Router::connect('/vestry/:action/*', array('controller' => 'vestries'));
+    
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

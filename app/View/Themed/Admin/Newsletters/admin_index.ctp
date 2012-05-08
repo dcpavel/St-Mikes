@@ -65,7 +65,8 @@
                     ),
                 array(
                     'controller' => 'users',
-                    'action' => 'admin_status',
+                    'action' => 'status',
+                    'admin' => true,
                     $id
                 )
             );
@@ -83,7 +84,8 @@
                     ),
                 array(
                     'controller' => 'newsletters',
-                    'action' => 'admin_edit',
+                    'action' => 'edit',
+                    'admin' => true,
                     $id
                 )
             );
@@ -105,7 +107,8 @@
                 )
             ),
             array(
-                'action' => 'admin_edit'
+                'action' => 'edit',
+                'admin' => true
             )
         );
     ?>

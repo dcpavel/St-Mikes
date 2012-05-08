@@ -33,9 +33,10 @@ class Staff extends AppModel {
         )
     );
     
+    /**
+     * Upload files if one has been selected to upload
+     */
     public function beforeSave($options = array()) {
-        parent::beforeSave($options);
-        
         if ($this->data[$this->alias]['file']['size'] !== 0) {
             if ($this->exists() && $current = $this->field('picture')) {
                 $this->deleteExistingFile($this->field('picture'), 'img/Staff');
@@ -46,13 +47,14 @@ class Staff extends AppModel {
             $this->data[$this->alias]['picture'] = $name;
         }
         
-        return true;
+        return parent::beforeSave($options);
     }
     
-    public function getStaffByPostion($position) {
-        
-    }
-    
+    /**
+     * Give a formated list of staff with their positions and names
+     * 
+     * @return array
+     */
     public function positionsList() {
         $staff = $this->find('all', array(
             'fields' => array(

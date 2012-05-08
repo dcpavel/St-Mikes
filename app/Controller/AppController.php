@@ -1,6 +1,5 @@
 <?php
-class AppController extends Controller {
-    
+class AppController extends Controller {    
     public $helpers = array(
         'Js' => array('Jquery'),
         'Html' => array('className' => 'AppHtml'),
@@ -32,8 +31,4 @@ class AppController extends Controller {
         
         parent::beforeFilter();
     }
-    
-    /**
-     * @TODO: Restrict access for other user types than 'admin' 
-     */
 }
