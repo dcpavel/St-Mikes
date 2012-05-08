@@ -73,4 +73,54 @@ class Staff extends AppModel {
         
         return $formatted;
     }
+    
+    /**
+     * Construct the appropriate options for pagination or find
+     * 
+     * @param array $search The POST data for use in a search
+     * @return array Options containing conditions and order
+     */
+    public function searchOptions($search) {
+        $term = $search['Search'];
+        $options = array();
+        
+        switch ($search['Category']) {
+            case 'name':
+                $options = array(
+                    'conditions' => array(
+                        'Staff.name LIKE' => "%$term%"
+                    ),
+                    'order' => array(
+                        'Staff.name' => 'ASC'
+                    )
+                );
+                break;
+            case 'position':
+                $options = array(
+                    'conditions' => array(
+                        'Staff.position LIKE' => "%$term%"
+                    ),
+                    'order' => array(
+                        'Staff.position' => 'ASC'
+                    )
+                );
+                break;
+            default:
+                $options = array(
+                    'conditions' => array(
+                        'OR' => array(
+                            'Staff.name LIKE' => "%$term%",
+                            'Staff.position LIKE' => "%$term%"
+                        )
+                    ),
+                    'order' => array(
+                        'Staff.id' => 'ASC'
+                    )
+                );
+                break;
+        }
+        
+        
+        return $options;
+    }
 }

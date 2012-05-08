@@ -71,45 +71,50 @@ class Newsletter extends AppModel {
         $term = trim($search['Search']);
         $options = array();
         
-        if ($search['Category'] === 'date') {
-            $options = array(
-                'conditions' => $this->dateSearch($term),
-                'order' => array(
-                    'Newsletter.date' => 'ASC'
-                )
-            );
-        } elseif ($search['Category'] === 'title') {
-            $options = array(
-                'conditions' => array(
-                    'Newsletter.title LIKE' => "%$term%"
-                ),
-                'order' => array(
-                    'Newsletter.title' => 'ASC'
-                )
-            );
-        } elseif ($search['Category'] === 'filename') {
-            $options = array(
-                'conditions' => array(
-                    'Newsletter.file LIKE' => "%$term%"
-                ),
-                'order' => array(
-                    'Newsletter.file' => 'ASC'
-                )
-            );
-        } else {
-            $dateSearch = $this->dateSearch($term, false);
-            $options = array(
-                'conditions' => array(
-                    'OR' => array(
-                        $dateSearch,
-                        'Newsletter.title LIKE' => "%$term%",
-                        'Newsletter.file LIKE' => "%$term%"
+        switch ($search['Category']) {
+            case 'date':
+                $options = array(
+                    'conditions' => $this->dateSearch($term),
+                    'order' => array(
+                        'Newsletter.date' => 'ASC'
                     )
-                ),
-                'order' => array(
-                    'Newsletter.date' => 'ASC'
-                )
-            );
+                );
+                break;
+            case 'title':
+                $options = array(
+                    'conditions' => array(
+                        'Newsletter.title LIKE' => "%$term%"
+                    ),
+                    'order' => array(
+                        'Newsletter.title' => 'ASC'
+                    )
+                );
+                break;
+            case 'filename':
+                $options = array(
+                    'conditions' => array(
+                        'Newsletter.file LIKE' => "%$term%"
+                    ),
+                    'order' => array(
+                        'Newsletter.file' => 'ASC'
+                    )
+                );
+                break;
+            default:
+                $dateSearch = $this->dateSearch($term, false);
+                $options = array(
+                    'conditions' => array(
+                        'OR' => array(
+                            $dateSearch,
+                            'Newsletter.title LIKE' => "%$term%",
+                            'Newsletter.file LIKE' => "%$term%"
+                        )
+                    ),
+                    'order' => array(
+                        'Newsletter.date' => 'ASC'
+                    )
+                );
+                break;
         }
         
         return $options;

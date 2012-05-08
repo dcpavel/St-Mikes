@@ -27,25 +27,6 @@
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
     
-    
-/**
- * Custom routes 
- */
-
-    Router::connect('/clergy/:action/*', array('controller' => 'staff'));
-    
-    Router::connect('/music/:action/*', array('controller' => 'choirs'));
-    
-    Router::connect('/holydays/:action/*', array('controller' => 'holidays'));
-    
-    Router::connect('/education/:action/*', array('controller' => 'lessons'));
-    
-    Router::connect('/communication/:action/*', array('controller' => 'libraries'));
-    
-    Router::connect('/evangilism/:action/*', array('controller' => 'evangilisms'));
-    
-    Router::connect('/vestry/:action/*', array('controller' => 'vestries'));
-    
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -77,3 +58,22 @@
  * the built-in default routes.
  */
 	require CAKE . 'Config' . DS . 'routes.php';
+    
+/**
+ * Custom routes 
+ */
+
+    Router::connect('/clergy/:action/*', array('controller' => 'staff'));
+    Router::connect('/admin/clergy/:action/*', array('controller' => 'staff', 'prefix' => 'admin'));
+    
+    Router::connect('/music/:action/*', array('controller' => 'choirs'));
+    
+    Router::connect('/holydays/:action/*', array('controller' => 'holidays'));
+    
+    Router::connect('/education/:action/*', array('controller' => 'lessons'));
+    
+    Router::connect('/communication/:action/*', array('controller' => 'libraries'));
+    
+    Router::connect('/evangilism/:action/*', array('controller' => 'evangilisms'));
+    
+    Router::connect('/vestry/:action/*', array('controller' => 'vestries'));

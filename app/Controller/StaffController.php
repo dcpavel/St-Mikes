@@ -11,52 +11,11 @@ class StaffController extends AppController {
         parent::beforeFilter();
     }
     
-    public function view($id) {
-        $this->Staff->recursive = 0;
-        
-        $this->set(array(
-            'detail' => $this->Staff->findById($id)
-        ));
-        
-        if ($this->request->is('ajax')) {
-            $this->layout = 'ajax';
-            $this->render('/Elements/Staff/view');
-        }
-    }
-    
     public function admin_index() {
         $this->Staff->recursive = 0;
         
         if (!$this->request->is('get')) {
-            $search = $this->request->data['Staff']['Search'];
-            
-            $options = array(
-                'conditions' => array(
-                    'OR' => array(
-                        'Staff.name LIKE' => "%$search%",
-                        'Staff.position LIKE' => "%$search%"
-                    )
-                )
-            );
-            
-            switch ($this->request->data['Staff']['Category']) {
-                case 'name':
-                    $options = array(
-                        'conditions' => array(
-                            'Staff.name LIKE' => "%$search%"
-                        )
-                    );
-                    break;
-                case 'position':
-                    $options = array(
-                        'conditions' => array(
-                            'Staff.position LIKE' => "%$search%"
-                        )
-                    );
-                    break;
-            }
-            
-            $this->paginate = $options;            
+            $this->paginate = $this->Staff->searchOptions($this->request->data['Staff']);            
         }
         
         $this->set(array(
@@ -106,5 +65,18 @@ class StaffController extends AppController {
         $this->set(array(
             'staff' => $staff
         ));
+    }
+    
+    public function view($id) {
+        $this->Staff->recursive = 0;
+        
+        $this->set(array(
+            'detail' => $this->Staff->findById($id)
+        ));
+        
+        if ($this->request->is('ajax')) {
+            $this->layout = 'ajax';
+            $this->render('/Elements/Staff/view');
+        }
     }
 }

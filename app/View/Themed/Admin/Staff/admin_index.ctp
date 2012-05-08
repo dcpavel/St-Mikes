@@ -59,7 +59,11 @@
                             'title' => $title
                         )
                     ),
-                array('controller' => 'staff', 'action' => 'admin_status', $id)
+                array(
+                    'controller' => 'staff',
+                    'action' => 'status',
+                    'admin' => true,
+                    $id)
             );
         $row[] = $member['Staff']['position'];
         $row[] = $member['Staff']['name'];
@@ -72,7 +76,11 @@
                             'title' => 'Edit ' . $member['Staff']['position']
                         )
                     ),
-                array('controller' => 'staff', 'action' => 'admin_edit', $id)
+                array(
+                    'controller' => 'staff',
+                    'action' => 'edit',
+                    'admin' => true,
+                    $id)
             );
         
         array_push($cells, $row);
@@ -91,7 +99,11 @@
                         'class' => 'add_button'
                     )
                 ),
-            array('action' => 'admin_edit')
+            array(
+                'controller' => 'staff',
+                'action' => 'edit',
+                'admin' => true
+                )
         );
     ?>
 </div>

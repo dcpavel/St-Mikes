@@ -3694,3 +3694,79 @@
 #11 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(NewslettersController), Object(CakeRequest), Object(CakeResponse))
 #12 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #13 {main}
+2012-05-08 04:24:55 Error: [MissingActionException] Action VestriesController::admin_index() could not be found.
+#0 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-05-08 04:24:56 Error: [MissingActionException] Action VestriesController::admin_index() could not be found.
+#0 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-05-08 04:25:06 Error: [MissingActionException] Action VestriesController::admin_index() could not be found.
+#0 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-05-08 04:25:06 Error: [MissingActionException] Action VestriesController::admin_index() could not be found.
+#0 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#1 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2012-05-08 04:50:38 Error: [MissingTableException] Database table vestries for model Vestry was not found.
+#0 E:\StMikes\lib\Cake\Model\Model.php(3236): Model->setSource('vestries')
+#1 E:\StMikes\lib\Cake\Model\Model.php(2458): Model->getDataSource()
+#2 E:\StMikes\lib\Cake\Controller\Component\PaginatorComponent.php(172): Model->find('all', Array)
+#3 E:\StMikes\lib\Cake\Controller\Controller.php(1024): PaginatorComponent->paginate(NULL, Array, Array)
+#4 E:\StMikes\app\Controller\VestriesController.php(22): Controller->paginate()
+#5 [internal function]: VestriesController->admin_index()
+#6 E:\StMikes\lib\Cake\Controller\Controller.php(473): ReflectionMethod->invokeArgs(Object(VestriesController), Array)
+#7 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#8 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#9 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2012-05-08 04:50:39 Error: [MissingTableException] Database table vestries for model Vestry was not found.
+#0 E:\StMikes\lib\Cake\Model\Model.php(3236): Model->setSource('vestries')
+#1 E:\StMikes\lib\Cake\Model\Model.php(2458): Model->getDataSource()
+#2 E:\StMikes\lib\Cake\Controller\Component\PaginatorComponent.php(172): Model->find('all', Array)
+#3 E:\StMikes\lib\Cake\Controller\Controller.php(1024): PaginatorComponent->paginate(NULL, Array, Array)
+#4 E:\StMikes\app\Controller\VestriesController.php(22): Controller->paginate()
+#5 [internal function]: VestriesController->admin_index()
+#6 E:\StMikes\lib\Cake\Controller\Controller.php(473): ReflectionMethod->invokeArgs(Object(VestriesController), Array)
+#7 E:\StMikes\lib\Cake\Routing\Dispatcher.php(107): Controller->invokeAction(Object(CakeRequest))
+#8 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#9 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2012-05-08 04:53:27 Error: [MissingViewException] View file "E:\StMikes\app\View\Themed\Admin\Vestries\admin_edit.ctp" is missing.
+#0 E:\StMikes\lib\Cake\View\View.php(363): View->_getViewFileName(NULL)
+#1 E:\StMikes\lib\Cake\Controller\Controller.php(899): View->render(NULL, NULL)
+#2 E:\StMikes\lib\Cake\Routing\Dispatcher.php(114): Controller->render()
+#3 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-05-08 04:53:27 Error: [MissingViewException] View file "E:\StMikes\app\View\Themed\Admin\Vestries\admin_edit.ctp" is missing.
+#0 E:\StMikes\lib\Cake\View\View.php(363): View->_getViewFileName(NULL)
+#1 E:\StMikes\lib\Cake\Controller\Controller.php(899): View->render(NULL, NULL)
+#2 E:\StMikes\lib\Cake\Routing\Dispatcher.php(114): Controller->render()
+#3 E:\StMikes\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(VestriesController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2012-05-08 04:54:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-08 04:55:26 Error: [MissingControllerException] Controller class VestryController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-08 04:55:27 Error: [MissingControllerException] Controller class VestryController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-08 04:56:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-08 04:57:45 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-05-08 04:57:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 E:\StMikes\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
