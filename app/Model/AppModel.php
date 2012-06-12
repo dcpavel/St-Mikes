@@ -1,4 +1,10 @@
 <?php
+/**
+ * Description of AppHelper
+ *
+ * @author Darren
+ */
+App::uses('Model', 'Model');
 class AppModel extends Model {
     /**
      * This will upload a file to the given directory.

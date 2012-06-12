@@ -417,41 +417,46 @@ footer nav {
 .form {
     display: block;
     background: white;
-    border: 5px solid #766a62;
-    padding: 15px;
-    width: 350px;
+    border: .5em solid #766a62;
+    padding: 1.5em;
+    width: 24em;
 }
 
-.form .required label:after {
+.required label:after {
     color: red;
     content: '*';
-    margin-left: 3px;
+    margin-left: .3em;
 }
 
-.form .input label {
-    width: 80px;
+label {
+    width: 7.5em;
     text-align: right;
-    margin-right: 10px;
+    margin-right: 1em;
     display: inline-block;
 }
 
-.form .textarea label {
+.textarea label {
     vertical-align: top;
 }
 
-.form input {
+input {
     width: 200px;
     margin: 10px 0px;
 }
 
-.form input[type="submit"], .form input[type="image"] {
+input[type="submit"], input[type="image"] {
     width: auto;
     margin-left: 90px;
 }
 
-.form .radio input, .form .radio label {
+.radio input {
     width: auto;
-    margin: 0px 10px;
+    margin: 0 .5em;
+}
+
+.radio label {
+    width: auto;
+    margin: 0 1em 0 0;
 }
 
 /* Comments */

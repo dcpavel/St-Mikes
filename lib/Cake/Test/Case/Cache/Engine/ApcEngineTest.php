@@ -4,14 +4,14 @@
  *
  * PHP 5
  *
- * CakePHP(tm) Tests <http://book.cakephp.org/view/1196/Testing>
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://book.cakephp.org/view/1196/Testing CakePHP(tm) Tests
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Cache.Engine
  * @since         CakePHP(tm) v 1.2.0.5434
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -60,7 +60,7 @@ class ApcEngineTest extends CakeTestCase {
 
 		$result = Cache::read('test', 'apc');
 		$expecting = '';
-		$this->assertEqual($result, $expecting);
+		$this->assertEquals($expecting, $result);
 
 		$data = 'this is a test of the emergency broadcasting system';
 		$result = Cache::write('test', $data, 'apc');
@@ -68,7 +68,7 @@ class ApcEngineTest extends CakeTestCase {
 
 		$result = Cache::read('test', 'apc');
 		$expecting = $data;
-		$this->assertEqual($result, $expecting);
+		$this->assertEquals($expecting, $result);
 
 		Cache::delete('test', 'apc');
 	}
@@ -78,13 +78,13 @@ class ApcEngineTest extends CakeTestCase {
  *
  * @return void
  */
-	function testReadWriteDurationZero() {
+	public function testReadWriteDurationZero() {
 		Cache::config('apc', array('engine' => 'Apc', 'duration' => 0, 'prefix' => 'cake_'));
 		Cache::write('zero', 'Should save', 'apc');
 		sleep(1);
 
 		$result = Cache::read('zero', 'apc');
-		$this->assertEqual('Should save', $result);
+		$this->assertEquals('Should save', $result);
 	}
 
 /**
@@ -106,7 +106,7 @@ class ApcEngineTest extends CakeTestCase {
 		$result = Cache::read('other_test', 'apc');
 		$this->assertFalse($result);
 
-		Cache::set(array('duration' =>  1), 'apc');
+		Cache::set(array('duration' => 1), 'apc');
 
 		$data = 'this is a test of the emergency broadcasting system';
 		$result = Cache::write('other_test', $data, 'apc');
@@ -147,17 +147,16 @@ class ApcEngineTest extends CakeTestCase {
 		$this->assertTrue($result);
 
 		$result = Cache::decrement('test_decrement', 1, 'apc');
-		$this->assertEqual(4, $result);
+		$this->assertEquals(4, $result);
 
 		$result = Cache::read('test_decrement', 'apc');
-		$this->assertEqual(4, $result);
+		$this->assertEquals(4, $result);
 
 		$result = Cache::decrement('test_decrement', 2, 'apc');
-		$this->assertEqual(2, $result);
+		$this->assertEquals(2, $result);
 
 		$result = Cache::read('test_decrement', 'apc');
-		$this->assertEqual(2, $result);
-
+		$this->assertEquals(2, $result);
 	}
 
 /**
@@ -172,16 +171,16 @@ class ApcEngineTest extends CakeTestCase {
 		$this->assertTrue($result);
 
 		$result = Cache::increment('test_increment', 1, 'apc');
-		$this->assertEqual(6, $result);
+		$this->assertEquals(6, $result);
 
 		$result = Cache::read('test_increment', 'apc');
-		$this->assertEqual(6, $result);
+		$this->assertEquals(6, $result);
 
 		$result = Cache::increment('test_increment', 2, 'apc');
-		$this->assertEqual(8, $result);
+		$this->assertEquals(8, $result);
 
 		$result = Cache::read('test_increment', 'apc');
-		$this->assertEqual(8, $result);
+		$this->assertEquals(8, $result);
 	}
 
 /**

@@ -4,14 +4,14 @@
  *
  * PHP 5
  *
- * CakePHP(tm) Tests <http://book.cakephp.org/view/1196/Testing>
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://book.cakephp.org/view/1196/Testing CakePHP(tm) Tests
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Cache.Engine
  * @since         CakePHP(tm) v 1.2.0.5434
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -32,7 +32,9 @@ class XcacheEngineTest extends CakeTestCase {
  * @return void
  */
 	public function setUp() {
-		$this->skipUnless(function_exists('xcache_set'), 'Xcache is not installed or configured properly');
+		if (!function_exists('xcache_set')) {
+			$this->markTestSkipped('Xcache is not installed or configured properly');
+		}
 		$this->_cacheDisable = Configure::read('Cache.disable');
 		Configure::write('Cache.disable', false);
 		Cache::config('xcache', array('engine' => 'Xcache', 'prefix' => 'cake_'));
@@ -57,7 +59,7 @@ class XcacheEngineTest extends CakeTestCase {
 		$settings = Cache::settings();
 		$expecting = array(
 			'prefix' => 'cake_',
-			'duration'=> 3600,
+			'duration' => 3600,
 			'probability' => 100,
 			'engine' => 'Xcache',
 		);
@@ -65,7 +67,7 @@ class XcacheEngineTest extends CakeTestCase {
 		$this->assertTrue(isset($settings['PHP_AUTH_PW']));
 
 		unset($settings['PHP_AUTH_USER'], $settings['PHP_AUTH_PW']);
-		$this->assertEqual($settings, $expecting);
+		$this->assertEquals($settings, $expecting);
 	}
 
 /**
@@ -78,7 +80,7 @@ class XcacheEngineTest extends CakeTestCase {
 
 		$result = Cache::read('test');
 		$expecting = '';
-		$this->assertEqual($result, $expecting);
+		$this->assertEquals($expecting, $result);
 
 		$data = 'this is a test of the emergency broadcasting system';
 		$result = Cache::write('test', $data);
@@ -86,7 +88,7 @@ class XcacheEngineTest extends CakeTestCase {
 
 		$result = Cache::read('test');
 		$expecting = $data;
-		$this->assertEqual($result, $expecting);
+		$this->assertEquals($expecting, $result);
 
 		Cache::delete('test');
 	}
@@ -109,7 +111,7 @@ class XcacheEngineTest extends CakeTestCase {
 		$result = Cache::read('other_test');
 		$this->assertFalse($result);
 
-		Cache::set(array('duration' =>  "+1 second"));
+		Cache::set(array('duration' => "+1 second"));
 
 		$data = 'this is a test of the emergency broadcasting system';
 		$result = Cache::write('other_test', $data);
@@ -161,16 +163,16 @@ class XcacheEngineTest extends CakeTestCase {
 		$this->assertTrue($result);
 
 		$result = Cache::decrement('test_decrement');
-		$this->assertEqual(4, $result);
+		$this->assertEquals(4, $result);
 
 		$result = Cache::read('test_decrement');
-		$this->assertEqual(4, $result);
+		$this->assertEquals(4, $result);
 
 		$result = Cache::decrement('test_decrement', 2);
-		$this->assertEqual(2, $result);
+		$this->assertEquals(2, $result);
 
 		$result = Cache::read('test_decrement');
-		$this->assertEqual(2, $result);
+		$this->assertEquals(2, $result);
 	}
 
 /**
@@ -183,15 +185,15 @@ class XcacheEngineTest extends CakeTestCase {
 		$this->assertTrue($result);
 
 		$result = Cache::increment('test_increment');
-		$this->assertEqual(6, $result);
+		$this->assertEquals(6, $result);
 
 		$result = Cache::read('test_increment');
-		$this->assertEqual(6, $result);
+		$this->assertEquals(6, $result);
 
 		$result = Cache::increment('test_increment', 2);
-		$this->assertEqual(8, $result);
+		$this->assertEquals(8, $result);
 
 		$result = Cache::read('test_increment');
-		$this->assertEqual(8, $result);
+		$this->assertEquals(8, $result);
 	}
 }

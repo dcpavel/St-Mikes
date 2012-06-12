@@ -3,7 +3,6 @@
  * @property Newsletter $Newsletter 
  */
 class NewslettersController extends AppController {
-    public $name = 'Newsletters';
     
     public function beforeFilter() {
         $this->Auth->allow(array('view', 'index', 'download'));

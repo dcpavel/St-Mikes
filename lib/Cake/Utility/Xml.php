@@ -7,18 +7,25 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Utility
  * @since         CakePHP v .0.10.3.1400
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+/**
+ * XML handling for Cake.
+ *
+ * The methods in these classes enable the datasources that use XML to work.
+ *
+ * @package       Cake.Utility
+ */
 class Xml {
 
 /**
@@ -200,7 +207,16 @@ class Xml {
 						continue;
 					}
 					if ($key[0] !== '@' && $format === 'tags') {
-						$child = $dom->createElement($key, $value);
+						$child = null;
+						if (!is_numeric($value)) {
+							// Escape special characters
+							// http://www.w3.org/TR/REC-xml/#syntax
+							// https://bugs.php.net/bug.php?id=36795
+							$child = $dom->createElement($key, '');
+							$child->appendChild(new DOMText($value));
+						} else {
+							$child = $dom->createElement($key, $value);
+						}
 						$node->appendChild($child);
 					} else {
 						if ($key[0] === '@') {
@@ -214,11 +230,11 @@ class Xml {
 					if ($key[0] === '@') {
 						throw new XmlException(__d('cake_dev', 'Invalid array'));
 					}
-					if (array_keys($value) === range(0, count($value) - 1)) { // List
+					if (is_numeric(implode('', array_keys($value)))) { // List
 						foreach ($value as $item) {
-							$data = compact('dom', 'node', 'key', 'format');
-							$data['value'] = $item;
-							self::_createChild($data);
+							$itemData = compact('dom', 'node', 'key', 'format');
+							$itemData['value'] = $item;
+							self::_createChild($itemData);
 						}
 					} else { // Struct
 						self::_createChild(compact('dom', 'node', 'key', 'value', 'format'));

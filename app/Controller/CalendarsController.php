@@ -4,7 +4,6 @@
  * @property CalendarEvent $CalendarEvent 
  */
 class CalendarsController extends AppController {
-    public $name = 'Calendars';
     
     public $uses = array('Calendar', 'CalendarEvent');
     

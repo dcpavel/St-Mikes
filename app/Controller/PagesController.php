@@ -54,7 +54,7 @@ class PagesController extends AppController {
 
         
         public function beforeFilter() {
-            $this->Auth->allow('*');
+            $this->Auth->allow();
             
             parent::beforeFilter();
         }

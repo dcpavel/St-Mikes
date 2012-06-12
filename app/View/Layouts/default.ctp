@@ -4,6 +4,8 @@
         <meta charset="utf-8" />
         <title><?php echo $title_for_layout ?></title>
         <?php
+        echo $this->fetch('meta');
+        
         $google_key = Configure::read('GoogleApi.key');
         echo $this->Html->css(array('base'), null, array('inline' => true));
         echo $this->Html->script(array(
@@ -15,7 +17,7 @@
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <?php echo $scripts_for_layout; ?>
+        <?php echo $this->fetch('css'); ?>
     </head>
     <body>
         <div id="wrapper">
@@ -24,7 +26,7 @@
             </header>
             <div id="content-wrapper">
                 <div id="content">
-                    <?php echo $content_for_layout; ?>
+                    <?php echo $this->fetch('content'); ?>
                 </div>
                 <footer>
                     <?php echo $this->element('Base/footer'); ?>
@@ -34,6 +36,7 @@
         <?php
         echo $this->element('sql_dump');
         echo $this->Js->writeBuffer();
+        echo $this->fetch('script');
         ?>
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

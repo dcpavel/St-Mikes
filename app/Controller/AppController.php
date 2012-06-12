@@ -1,4 +1,10 @@
 <?php
+/**
+ * Description of AppHelper
+ *
+ * @author Darren
+ */
+App::uses('Controller', 'Controller');
 class AppController extends Controller {    
     public $helpers = array(
         'Js' => array('Jquery'),

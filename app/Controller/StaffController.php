@@ -3,7 +3,6 @@
  * @property Staff $Staff 
  */
 class StaffController extends AppController {
-    public $name = 'Staff';
     
     public function beforeFilter() {
         $this->Auth->allow(array('view', 'index'));

@@ -36,6 +36,10 @@
     
     echo $this->Form->input('description');
     
+    echo $this->Form->input('phone');
+    
+    echo $this->Form->input('email', array('type' => 'email'));
+    
     echo $this->Form->input(
             'status',
             array(

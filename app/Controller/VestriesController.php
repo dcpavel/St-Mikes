@@ -3,7 +3,6 @@
  * @property Vestry $Vestry
  */
 class VestriesController extends AppController {
-    public $name = 'Vestries';
     
     public function beforeFilter() {
         $this->Auth->allow(array('index', 'view'));

@@ -63,7 +63,7 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-        'port' => 3306,
+//                'port' => 3306,
 		'login' => 'dpavel_stmikes',
 		'password' => 'buGEp6CH&wapuvu9',
 		'database' => 'dpavel_st_mikes',

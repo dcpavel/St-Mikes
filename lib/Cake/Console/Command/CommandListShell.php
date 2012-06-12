@@ -1,22 +1,19 @@
 <?php
 /**
- * Command list Shell
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP Project
  * @package       Cake.Console.Command
  * @since         CakePHP v 2.0
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+App::uses('AppShell', 'Console/Command');
 App::uses('Inflector', 'Utility');
 
 /**
@@ -24,7 +21,7 @@ App::uses('Inflector', 'Utility');
  *
  * @package       Cake.Console.Command
  */
-class CommandListShell extends Shell {
+class CommandListShell extends AppShell {
 
 /**
  * startup
@@ -45,7 +42,7 @@ class CommandListShell extends Shell {
 	public function main() {
 		if (empty($this->params['xml'])) {
 			$this->out(__d('cake_console', "<info>Current Paths:</info>"), 2);
-			$this->out(" -app: ". APP_DIR);
+			$this->out(" -app: " . APP_DIR);
 			$this->out(" -working: " . rtrim(APP, DS));
 			$this->out(" -root: " . rtrim(ROOT, DS));
 			$this->out(" -core: " . rtrim(CORE_PATH, DS));
@@ -80,11 +77,15 @@ class CommandListShell extends Shell {
  */
 	protected function _getShellList() {
 		$shellList = array();
+		$skipFiles = array('AppShell');
 
-		$shells = App::objects('file', App::core('Console/Command'));
+		$corePath = App::core('Console/Command');
+		$shells = App::objects('file', $corePath[0]);
+		$shells = array_diff($shells, $skipFiles);
 		$shellList = $this->_appendShells('CORE', $shells, $shellList);
 
 		$appShells = App::objects('Console/Command', null, false);
+		$appShells = array_diff($appShells, $shells, $skipFiles);
 		$shellList = $this->_appendShells('app', $appShells, $shellList);
 
 		$plugins = CakePlugin::loaded();
@@ -229,4 +230,5 @@ class CommandListShell extends Shell {
 				'boolean' => true
 			));
 	}
+
 }
