@@ -37,4 +37,12 @@ class AppController extends Controller {
         
         parent::beforeFilter();
     }
+    
+    public function admin_status($id) {
+        $model = $this->{$this->modelClass};
+        
+        $model->id = $id;
+        
+        return $model->saveField('status', !$model->field('status'));
+    }
 }

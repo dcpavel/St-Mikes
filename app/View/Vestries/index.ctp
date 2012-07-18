@@ -1,6 +1,6 @@
-<?php $this->set('title_for_layout', 'Staff Listing'); ?>
+<?php $this->set('title_for_layout', 'Vestry Listing'); ?>
 <h1>
-    Staff Listing
+    Vestry Listing
 </h1>
 <hr />
 <nav class="left list">

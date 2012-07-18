@@ -4,8 +4,8 @@
             $this->Html->image(
                     'Arrow_left.png',
                     array(
-                        'alt' => 'Return to Calendar',
-                        'title' => 'Return to Calendar'
+                        'alt' => 'Return to Users',
+                        'title' => 'Return to Users'
                     )
                 ),
             array(

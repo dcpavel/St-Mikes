@@ -85,14 +85,22 @@ class NewslettersController extends AppController {
     }
     
     public function admin_status($id) {
-        $this->Newsletter->saveField('status', $status);
-
-        if ($this->Newsletter->changeStatus($id)) {
-            $position = $this->Newsletter->field('position');
-            $status_message = ($this->Newsletter->field('status')) ? 'active' : 'inactive';
-            $this->Session->setFlash("$position has been made $status_message.");
+        $values = $this->Document->find('first', array(
+            'fields' => array(
+                'Document.title', 'Document.status', 'Document.id'
+            ),
+            'conditions' => array(
+                'Document.id' => $id
+            ),
+            'recursive' => 0
+        ));
+        list($title, $status, $tmp_id) = array_values($values['Document']);
+        
+        if (parent::admin_status($id)) {
+            $message = ($status) ? 'deactived' : 'actived';
+            $this->Session->setFlash("$title has been $message.");
         } else {
-            $this->Session->setFlash("There was a problem changing the position's status");
+            $this->Session->setFlash("There was a problem changing the $title's status");
         }
         
         $this->redirect($this->referer());

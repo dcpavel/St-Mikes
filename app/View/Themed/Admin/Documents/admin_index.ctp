@@ -1,16 +1,20 @@
 <div class="search form">
     <?php
-    echo $this->Form->create('User');
+    echo $this->Form->create('Document');
     
     echo $this->Form->input('Search');
     echo $this->Form->input(
-            'Category',
+            'Category'
+        );
+    echo $this->Form->input(
+            'Filter',
             array(
                 'type' => 'radio',
                 'options' => array(
                     'all' => 'All',
-                    'username' => 'Username',
-                    'role' => 'Role'
+                    'date' => 'Date',
+                    'title' => 'Title',
+                    'filename' => 'Filename'
                 ),
                 'default' => 'all'
             )
@@ -20,6 +24,7 @@
             'Zoom.png',
             array(
                 'alt' => "Search",
+                'class' => 'add_button',
                 'title' => 'Search'
             ));
     echo $this->Form->end();
@@ -30,60 +35,60 @@
     echo $this->Session->flash();
     
     $headers = array(
-        array('Status' => array('class' => 'status_column')),
-        'Username',
-        'Role',
+        'Status',
+        'Date',
+        'Title',
+        'Filename',
         'Created',
-        array('Edit' => array('class' => 'edit_column'))
+        'Edit'
     );
     
     $table = $this->Html->tableHeaders($headers);
     
     $cells = array();
-    foreach ($users as $user) {
+    foreach ($documents as $document) {
         $row = array();
         
-        $id = $user['User']['id'];
+        $id = $document['Document']['id'];
         
-        $class = 'enabled';
-        $title = 'Deactivate User';
-        if ($user['User']['status'] !== true) {
-            $class = 'disabled';
-            $title = 'Activate User';
+        $image = 'Badge-tick.png';
+        $title = 'Activate User';
+        if ($document['Document']['status'] !== true) {
+            $image = 'Badge-multiply.png';
+            $title = 'Dectivate Newsletter';
         }
         
         $row[] = $this->Html->link(
                 $this->Html->image(
-                        'Blank.png',
+                        $image,
                         array(
                             'title' => $title,
-                            'alt' => $title,
-                            'class' => $class
+                            'alt' => $title
                         )
                     ),
                 array(
                     'controller' => 'users',
-                    'action' => 'admin_status',
+                    'action' => 'status',
+                    'admin' => true,
                     $id
                 )
             );
-        
-        $row[] = $user['User']['username'];
-        $row[] = $user['User']['role'];
-        $row[] = date('H:i m-d-Y', strtotime($user['User']['created']));
-        
+        $row[] = date('F d, Y', strtotime($document['Document']['date']));
+        $row[] = $document['Document']['title'];
+        $row[] = $document['Document']['file'];
+        $row[] = date('H:i m-d-Y', strtotime($document['Document']['created']));
         $row[] = $this->Html->link(
                 $this->Html->image(
-                        'Blank.png',
+                        'Pencil.png',
                         array(
-                            'alt' => 'Edit User',
-                            'title' => 'Edit ' . $user['User']['username'],
-                            'class' => 'edit'
+                            'alt' => 'Edit Newsletter',
+                            'title' => 'Edit ' . $document['Document']['title']
                         )
                     ),
                 array(
-                    'controller' => 'users',
-                    'action' => 'admin_edit',
+                    'controller' => 'newsletters',
+                    'action' => 'edit',
+                    'admin' => true,
                     $id
                 )
             );
@@ -105,7 +110,8 @@
                 )
             ),
             array(
-                'action' => 'admin_edit'
+                'action' => 'edit',
+                'admin' => true
             )
         );
     ?>

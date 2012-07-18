@@ -25,8 +25,8 @@
                         ),
                 $this->Html->link(
                         'Newsletter', array(
-                            'controller' => 'newsletters',
-                            'action' => 'index'
+                            'controller' => 'documents',
+                            'action' => 'newsletters'
                             )
                         ),
                 $this->Html->link(
