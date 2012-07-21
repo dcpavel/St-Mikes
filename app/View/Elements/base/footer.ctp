@@ -34,7 +34,9 @@
         <?php
         echo $this->Html->link(
                 $this->Html->image('Facebook.png', array(
-                    'width' => 48
+                    'width' => 48,
+                    'alt' => 'Facebook Page',
+                    'title' => 'Facebook Page'
                 )),
                 'http://www.facebook.com/SMAACDM',
                 array(
@@ -43,7 +45,9 @@
             );
         echo $this->Html->link(
                 $this->Html->image('Episcopal-shield.png', array(
-                    'height' => 48
+                    'height' => 48,
+                    'alt' => 'Episcopal Church Website',
+                    'title' => 'Episcopal Church Website'
                 )),
                 'http://ecusa.anglican.org',
                 array(
