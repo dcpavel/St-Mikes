@@ -13,14 +13,8 @@ class DocumentCategoriesController extends AppController {
     public function admin_index() {
         $this->DocumentCategory->recursive = 0;
         
-        if (!$this->request->is('get')) {
-            $search = $this->data['DocumentCategory']['Search'];
-            
-            $this->paginate = array(
-                'conditions' => array(
-                    'DocumentCategory.title LIKE' => "%$search%"
-                )
-            );
+        if ($this->request->is('post')) {
+            $this->paginate = $this->DocumentCategories->searchOptions($this->request->data);
         }
         
         $this->set(array(
@@ -34,8 +28,8 @@ class DocumentCategoriesController extends AppController {
             $this->request->data = $this->DocumentCategory->findById($id);
         } else {
             if ($this->DocumentCategory->save($this->request->data)) {
-                $this->Session->setFlash('Newsletter saved.');
-                $this->redirect(array('action' => 'admin_edit', $this->DocumentCategory->id));
+                $this->Session->setFlash('Document type saved.');
+                $this->redirect(array('action' => 'admin_index'));
             } else {
                 $this->Session->setFlash($this->DocumentCategory->invalidFields());
             }
@@ -46,11 +40,11 @@ class DocumentCategoriesController extends AppController {
         $this->DocumentCategory->saveField('status', $status);
 
         if ($this->DocumentCategory->changeStatus($id)) {
-            $position = $this->DocumentCategory->field('position');
+            $title = $this->DocumentCategory->field('title');
             $status_message = ($this->DocumentCategory->field('status')) ? 'active' : 'inactive';
-            $this->Session->setFlash("$position has been made $status_message.");
+            $this->Session->setFlash("$title has been made $status_message.");
         } else {
-            $this->Session->setFlash("There was a problem changing the position's status");
+            $this->Session->setFlash("There was a problem changing the document type's status");
         }
         
         $this->redirect($this->referer());

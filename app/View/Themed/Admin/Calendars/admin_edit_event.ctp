@@ -1,6 +1,6 @@
 <?php
-echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.17.custom', 'calendar'));
-echo $this->Html->script(array('jquery-ui-1.8.17.custom.min'), array('inline' => false));
+echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.21.custom', 'calendar', 'form'));
+echo $this->Html->script(array('form'), array('inline' => false));
 ?>
 <div class="back">
     <?php
@@ -11,7 +11,7 @@ echo $this->Html->script(array('jquery-ui-1.8.17.custom.min'), array('inline' =>
                         'alt' => 'Return to Calendar',
                         'title' => 'Return to Calendar'
                     )
-                ) . ' <span>Return to Calendar</span>',
+                ),
             array(
                 'controller' => 'calendars',
                 'action' => 'index',
@@ -74,23 +74,48 @@ echo $this->Html->script(array('jquery-ui-1.8.17.custom.min'), array('inline' =>
     
     echo $this->Form->input('description');
     
+    $enable_class = 'enable active';
+    $disable_class = 'disable';
+    if (!empty($this->request->data['CalendarEvent']['status']) && !$this->request->data['CalendarEvent']['status']) {
+        $enable_class = 'enable';
+        $disable_class = 'disable active';
+    }
+    
     echo $this->Form->input(
             'status',
             array(
                 'div' => true,
                 'type' => 'radio',
                 'options' => array(
-                    1 => 'active',
-                    0 => 'inactive'
+                    1 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $enable_class,
+                                'title' => 'Active',
+                                'alt' => 'Active'
+                            )
+                        ),
+                    0 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $disable_class,
+                                'title' => 'Inactive',
+                                'alt' => 'Inactive'
+                            )
+                        )
                 ),
                 'default' => 1
             )
         );
     
-    echo $this->Form->submit('Disquette.png');
+    echo $this->Form->submit(
+            'Disquette.png',
+            array(
+                'title' => 'Save',
+                'alt' => 'Save'
+            )
+        );
+    
     echo $this->Form->end();
     ?>
 </div>
-<script type="text/javascript">
-    $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
-</script>

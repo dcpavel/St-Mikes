@@ -58,14 +58,34 @@
                 'div' => true,
                 'type' => 'radio',
                 'options' => array(
-                    1 => $this->Html->image('Blank.png', array('class' => $enable_class)),
-                    0 => $this->Html->image('Blank.png', array('class' => $disable_class))
+                    1 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $enable_class,
+                                'title' => 'Active',
+                                'alt' => 'Active'
+                            )
+                        ),
+                    0 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $disable_class,
+                                'title' => 'Inactive',
+                                'alt' => 'Inactive'
+                            )
+                        )
                 ),
                 'default' => 1
             )
         );
     
-    echo $this->Form->submit('Disquette.png');
+    echo $this->Form->submit(
+            'Disquette.png',
+            array(
+                'title' => 'Save',
+                'alt' => 'Save'
+            )
+        );
     echo $this->Form->end();
     ?>
 </div>

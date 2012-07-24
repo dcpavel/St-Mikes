@@ -4,7 +4,11 @@
     
     echo $this->Form->input('Search');
     echo $this->Form->input(
-            'Category'
+            'Category',
+            array(
+                'label' => 'Type',
+                'empty' => 'All Types'
+            )
         );
     echo $this->Form->input(
             'Filter',
@@ -39,7 +43,7 @@
         'Date',
         'Title',
         'Filename',
-        'Created',
+        'Type',
         'Edit'
     );
     
@@ -67,7 +71,7 @@
                         )
                     ),
                 array(
-                    'controller' => 'users',
+                    'controller' => 'documents',
                     'action' => 'status',
                     'admin' => true,
                     $id
@@ -76,17 +80,19 @@
         $row[] = date('F d, Y', strtotime($document['Document']['date']));
         $row[] = $document['Document']['title'];
         $row[] = $document['Document']['file'];
-        $row[] = date('H:i m-d-Y', strtotime($document['Document']['created']));
+        
+        $row[] = $document['DocumentCategory']['title'];
+        
         $row[] = $this->Html->link(
                 $this->Html->image(
                         'Pencil.png',
                         array(
-                            'alt' => 'Edit Newsletter',
+                            'alt' => 'Edit Document',
                             'title' => 'Edit ' . $document['Document']['title']
                         )
                     ),
                 array(
-                    'controller' => 'newsletters',
+                    'controller' => 'documents',
                     'action' => 'edit',
                     'admin' => true,
                     $id
@@ -105,8 +111,8 @@
                 'Orb_plus.png',
                 array(
                     'class' => 'add_button',
-                    'alt' => 'Add User',
-                    'title' => 'Add User'
+                    'alt' => 'Add Document',
+                    'title' => 'Add Document'
                 )
             ),
             array(

@@ -10,7 +10,7 @@
         echo $this->Html->css(array('base'), null, array('inline' => true));
         echo $this->Html->script(array(
             'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js',
             "http://maps.googleapis.com/maps/api/js?key=$google_key&sensor=false"
         ));
         ?>

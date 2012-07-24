@@ -99,7 +99,7 @@ class UsersController extends AppController {
             
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash('Data Saved');
-                $this->redirect(array('action' => 'admin_edit', $this->User->id));
+                $this->redirect(array('action' => 'admin_index'));
             }
         }
         
@@ -109,16 +109,22 @@ class UsersController extends AppController {
     }
     
     public function admin_status($id) {
-        if ($id == $this->Auth->user('id')) {
-            $this->Session->setFlash('You cannot deactivate yourself');
+        $values = $this->User->find('first', array(
+            'fields' => array(
+                'User.username', 'User.status', 'User.id'
+            ),
+            'conditions' => array(
+                'User.id' => $id
+            ),
+            'recursive' => 0
+        ));
+        list($title, $status, $tmp_id) = array_values($values['User']);
+        
+        if (parent::admin_status($id)) {
+            $message = ($status) ? "deactivated" : "activated";
+            $this->Session->setFlash("$title has been $message.");
         } else {
-            if ($this->User->changeStatus($id)) {
-                $name = $this->User->field('username');
-                $status_message = ($this->User->field('status')) ? 'active' : 'inactive';
-                $this->Session->setFlash("$name has been made $status_message.");
-            } else {
-                $this->Session->setFlash("There was a problem changing the user's status");
-            }
+            $this->Session->setFlash("There was a problem changing $title's status");
         }
         
         $this->redirect($this->referer());

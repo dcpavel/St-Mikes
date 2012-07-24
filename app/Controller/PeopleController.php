@@ -49,4 +49,26 @@ class PeopleController extends AppController {
             'positions' => $this->Person->Position->displayList()
         ));
     }
+    
+    public function admin_status($id) {
+        $values = $this->Person->find('first', array(
+            'fields' => array(
+                'Person.full_name', 'Person.status', 'Person.id'
+            ),
+            'conditions' => array(
+                'Person.id' => $id
+            ),
+            'recursive' => 0
+        ));
+        list($title, $status, $tmp_id) = array_values($values['PositionCategory']);
+        
+        if (parent::admin_status($id)) {
+            $message = ($status) ? "deactivated" : "activated";
+            $this->Session->setFlash("$title has been $message.");
+        } else {
+            $this->Session->setFlash("There was a problem changing $title's status");
+        }
+        
+        $this->redirect($this->referer());
+    }
 }

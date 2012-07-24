@@ -63,16 +63,14 @@ class DocumentsController extends AppController {
         $this->set($params);
     }
     
-    public function admin_index() {
-        $this->Document->recursive = 0;
-        
+    public function admin_index() {        
         if (!$this->request->is('get')) {
             $this->paginate = $this->Document->searchOptions($this->request->data['Document']);
         }
         
         $this->set(array(
             'documents' => $this->paginate(),
-            'categories' => $this->Document->DocumentCategory->categoryList()
+            'categories' => $this->Document->DocumentCategory->displayList()
         ));
     }
     
@@ -81,30 +79,42 @@ class DocumentsController extends AppController {
             $this->Document->recursive = 0;
             $this->request->data = $this->Document->findById($id);
         } else {
+            if (empty($this->request->data['Document']['filename']['tmp_name'])) {
+                unset($this->request->data['Document']['filename']);
+            }
+            
             if ($this->Document->save($this->request->data)) {
-                $this->Session->setFlash('Newsletter saved.');
-                $this->redirect(array('action' => 'admin_edit', $this->Document->id));
+                $this->Session->setFlash('Document saved.');
+                $this->redirect(array('action' => 'admin_index'));
             } else {
-                $this->Session->setFlash($this->Document->invalidFields());
+                $this->Session->setFlash('Please fix the errors below');
             }
         }
+        
+        $this->set(array(
+            'documentCategories' => $this->Document->DocumentCategory->displayList()
+        ));
     }
     
     public function admin_status($id) {
-        $this->Document->saveField('status', $status);
-
-        if ($this->Document->changeStatus($id)) {
-            $position = $this->Document->field('position');
-            $status_message = ($this->Document->field('status')) ? 'active' : 'inactive';
-            $this->Session->setFlash("$position has been made $status_message.");
+        $values = $this->Document->find('first', array(
+            'fields' => array(
+                'Document.title', 'Document.status', 'Document.id'
+            ),
+            'conditions' => array(
+                'Document.id' => $id
+            ),
+            'recursive' => 0
+        ));
+        list($title, $status, $tmp_id) = array_values($values['Document']);
+        
+        if (parent::admin_status($id)) {
+            $message = ($status) ? "deactivated" : "activated";
+            $this->Session->setFlash("$title has been $message.");
         } else {
-            $this->Session->setFlash("There was a problem changing the position's status");
+            $this->Session->setFlash("There was a problem changing $title's status");
         }
         
         $this->redirect($this->referer());
-    }
-    
-    public function uploader_index() {
-        
     }
 }

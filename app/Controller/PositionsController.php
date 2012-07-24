@@ -39,6 +39,28 @@ class PositionsController extends AppController {
         ));
     }
     
+    public function admin_status($id) {
+        $values = $this->Position->find('first', array(
+            'fields' => array(
+                'Position.title', 'Position.status', 'Position.id'
+            ),
+            'conditions' => array(
+                'Position.id' => $id
+            ),
+            'recursive' => 0
+        ));
+        list($title, $status, $tmp_id) = array_values($values['Position']);
+        
+        if (parent::admin_status($id)) {
+            $message = ($status) ? "deactivated" : "activated";
+            $this->Session->setFlash("$title has been $message.");
+        } else {
+            $this->Session->setFlash("There was a problem changing $title's status");
+        }
+        
+        $this->redirect($this->referer());
+    }
+    
     public function get_positions() {
         $this->layout = 'ajax';
         

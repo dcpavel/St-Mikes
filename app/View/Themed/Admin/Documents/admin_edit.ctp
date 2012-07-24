@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.17.custom'));
+echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.21.custom'));
 ?>
 <div class="back">
     <?php
@@ -7,12 +7,12 @@ echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.17.custom'));
             $this->Html->image(
                     'Arrow_left.png',
                     array(
-                        'alt' => 'Return to Calendar',
-                        'title' => 'Return to Calendar'
+                        'alt' => 'Return to Documents',
+                        'title' => 'Return to Documents'
                     )
                 ),
             array(
-                'controller' => 'newsletters',
+                'controller' => 'documents',
                 'action' => 'index',
                 'admin' => true
             )
@@ -23,17 +23,39 @@ echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.17.custom'));
     <?php
     echo $this->Session->flash();
     
-    echo $this->Form->create('Newsletter', array('type' => 'file'));
-    echo $this->Form->hidden('Newsletter.id');
+    echo $this->Form->create('Document', array('type' => 'file'));
+    echo $this->Form->hidden('Document.id');
     
-    echo $this->Form->input('Newsletter.date', array('type' => 'text', 'class' => 'date'));
+    echo $this->Form->input(
+            'Document.date',
+            array(
+                'type' => 'text',
+                'class' => 'date'
+            )
+        );
     
-    echo $this->Form->input('Newsletter.title');
+    echo $this->Form->input('Document.title');
     
-    if (!empty($this->request->data['Newsletter']['file'])) {
-        echo $this->request->data['Newsletter']['file'];
+    echo $this->Form->input(
+            'document_category_id',
+            array(
+                'label' => 'Type'
+            )
+        );
+    
+    echo $this->Html->div('clear', '&nbsp;');
+    
+    if (!empty($this->request->data['Document']['file'])) {
+        echo $this->request->data['Document']['file'];
     }
-    echo $this->Form->input('Newsletter.filename', array('type' => 'file'));
+    echo $this->Form->input('Document.filename', array('type' => 'file'));
+    
+    $enable_class = 'enable active';
+    $disable_class = 'disable';
+    if (!empty($this->request->data['Document']['status']) && !$this->request->data['Document']['status']) {
+        $enable_class = 'enable';
+        $disable_class = 'disable active';
+    }
     
     echo $this->Form->input(
             'status',
@@ -41,17 +63,38 @@ echo $this->Html->css(array('pepper-grinder/jquery-ui-1.8.17.custom'));
                 'div' => true,
                 'type' => 'radio',
                 'options' => array(
-                    1 => $this->Html->image('Badge-tick.png'),
-                    0 => $this->Html->image('Badge-multiply.png')
+                    1 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $enable_class,
+                                'title' => 'Active',
+                                'alt' => 'Active'
+                            )
+                        ),
+                    0 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $disable_class,
+                                'title' => 'Inactive',
+                                'alt' => 'Inactive'
+                            )
+                        )
                 ),
                 'default' => 1
             )
         );
     
-    echo $this->Form->submit('Disquette.png');
+    echo $this->Form->submit(
+            'Disquette.png',
+            array(
+                'title' => 'Save',
+                'alt' => 'Save'
+            )
+        );
+    
     echo $this->Form->end();
     ?>
 </div>
-<script type="text/javascript">
-    $('input.date').datepicker({dateFormat: 'yy-mm-dd'});
-</script>
+<?php
+echo $this->Html->script(array('form'));
+?>

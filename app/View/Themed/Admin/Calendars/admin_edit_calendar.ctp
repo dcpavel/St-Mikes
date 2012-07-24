@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->css(array('calendar'), null, array('inline' => false));
+echo $this->Html->css(array('calendar', 'form'), null, array('inline' => false));
 ?>
 <div class="back">
     <?php
@@ -10,7 +10,7 @@ echo $this->Html->css(array('calendar'), null, array('inline' => false));
                         'alt' => 'Return to Calendar',
                         'title' => 'Return to Calendar'
                     )
-                ) . ' <span>Return to Calendar</span>',
+                ),
             array(
                 'controller' => 'calendars',
                 'action' => 'admin_index'
@@ -39,11 +39,19 @@ echo $this->Html->css(array('calendar'), null, array('inline' => false));
             'color',
             array(
                 'options' => $colors,
-                'type' => 'radio'
+                'type' => 'radio',
+                'div' => 'radio colors'
             )
         );
     
     echo $this->Form->input('description');
+    
+    $enable_class = 'enable active';
+    $disable_class = 'disable';
+    if (!empty($this->request->data['Calendar']['status']) && !$this->request->data['Calendar']['status']) {
+        $enable_class = 'enable';
+        $disable_class = 'disable active';
+    }
     
     echo $this->Form->input(
             'status',
@@ -51,19 +59,43 @@ echo $this->Html->css(array('calendar'), null, array('inline' => false));
                 'div' => true,
                 'type' => 'radio',
                 'options' => array(
-                    1 => $this->Html->image('Badge-tick.png'),
-                    0 => $this->Html->image('Badge-multiply.png')
-                )
+                    1 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $enable_class,
+                                'title' => 'Active',
+                                'alt' => 'Active'
+                            )
+                        ),
+                    0 => $this->Html->image(
+                            'Blank.png',
+                            array(
+                                'class' => $disable_class,
+                                'title' => 'Inactive',
+                                'alt' => 'Inactive'
+                            )
+                        )
+                ),
+                'default' => 1
             )
         );
     
-    echo $this->Form->submit('Disquette.png');
+    echo $this->Form->submit(
+            'Disquette.png',
+            array(
+                'title' => 'Save',
+                'alt' => 'Save'
+            )
+        );
     echo $this->Form->end();
     ?>
 </div>
+<?php
+echo $this->Html->script(array('form'));
+?>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.radio input').hide().click(function() {
+        $('.colors input').hide().click(function() {
             $(this).siblings('label').removeClass('selected');
             $('label[for="' + this.id + '"]').addClass('selected');
         });

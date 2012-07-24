@@ -22,6 +22,16 @@
                         'admin' => true
                     )
                 );
+            echo $this->Html->nestedList(array(
+                $this->Html->link(
+                    'Document Types',
+                    array(
+                        'controller' => 'document_categories',
+                        'action' => 'index',
+                        'admin' => true
+                    )
+                )
+            ));
             ?>
         </li>
         <li class="blue">

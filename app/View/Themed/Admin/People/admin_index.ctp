@@ -71,7 +71,7 @@
                         )
                     ),
                 array(
-                    'controller' => 'users',
+                    'controller' => 'people',
                     'action' => 'admin_status',
                     $id
                 )
@@ -84,7 +84,7 @@
                 $this->Html->image(
                         'Pencil.png',
                         array(
-                            'alt' => 'Edit User',
+                            'alt' => 'Edit Person',
                             'title' => 'Edit ' . $person['Person']['full_name']
                         )
                     ),
@@ -107,8 +107,8 @@
                 'Orb_plus.png',
                 array(
                     'class' => 'add_button',
-                    'alt' => 'Add User',
-                    'title' => 'Add User'
+                    'alt' => 'Add Person',
+                    'title' => 'Add Person'
                 )
             ),
             array(

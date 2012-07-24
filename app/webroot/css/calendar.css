@@ -105,7 +105,7 @@
     margin: 1px;
 }
 
-.calendar.form .radio label {
+.radio.colors label {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -113,7 +113,7 @@
     margin: 0px;
 }
 
-.radio label.selected {
+.radio.colors label.selected {
     background-color: #f5f5f5;
     border: 1px solid #766a62;
     width: 32px;

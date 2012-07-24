@@ -29,12 +29,20 @@ class Document extends AppModel {
      * Upload files if one has been selected to upload
      */
     public function beforeSave($options = array()) {
-        if ($this->data[$this->alias]['filename']['size'] !== 0) {
+        if (isset($this->data[$this->alias]['filename']) && $this->data[$this->alias]['filename']['size'] !== 0) {
+            $documentCategory = $this->DocumentCategory->field(
+                    'title',
+                    array(
+                        'DocumentCategory.id' => $this->data[$this->alias]['document_category_id']
+                    )
+                );
+            $documentCategory = Inflector::pluralize($documentCategory);
+            
             if ($this->exists() && $current = $this->field('file')) {
-                $this->deleteExistingFile($this->field('file'), 'files/Documents');
+                $this->deleteExistingFile($this->field('file'), "files/$documentCategory");
             }
             
-            $name = $this->uploadFile($this->data[$this->alias]['filename'], 'files/Documents');
+            $name = $this->uploadFile($this->data[$this->alias]['filename'], "files/$documentCategory");
             
             $this->data[$this->alias]['file'] = $name;
         }
@@ -76,9 +84,17 @@ class Document extends AppModel {
      */
     public function searchOptions($search) {
         $term = trim($search['Search']);
-        $options = array();
+        $_options = array();
         
-        switch ($search['Category']) {
+        if (!empty($search['Category'])) {
+            $_options = array(
+                'conditions' => array(
+                    'Document.document_category_id' => $search['Category']
+                )
+            );
+        }
+        
+        switch ($search['Filter']) {
             case 'date':
                 $options = array(
                     'conditions' => $this->dateSearch($term),
@@ -124,6 +140,6 @@ class Document extends AppModel {
                 break;
         }
         
-        return $options;
+        return array_merge_recursive($options, $_options);
     }
 }

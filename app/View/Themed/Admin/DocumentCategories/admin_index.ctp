@@ -21,7 +21,6 @@
     $headers = array(
         'Status',
         'Title',
-        'Created',
         'Edit'
     );
     
@@ -49,7 +48,7 @@
                         )
                     ),
                 array(
-                    'controller' => 'users',
+                    'controller' => 'document_categories',
                     'action' => 'status',
                     'admin' => true,
                     $id
@@ -67,7 +66,7 @@
                         )
                     ),
                 array(
-                    'controller' => 'newsletters',
+                    'controller' => 'document_categories',
                     'action' => 'edit',
                     'admin' => true,
                     $id
@@ -86,8 +85,8 @@
                 'Orb_plus.png',
                 array(
                     'class' => 'add_button',
-                    'alt' => 'Add User',
-                    'title' => 'Add User'
+                    'alt' => 'Add Document Type',
+                    'title' => 'Add Document Type'
                 )
             ),
             array(
