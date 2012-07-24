@@ -11,7 +11,8 @@
     echo $this->Form->input(
             'positionCategory',
             array(
-                'empty' => 'All Groups'
+                'empty' => 'All Groups',
+                'label' => 'Group'
             )
         );
     echo "&nbsp;";
@@ -46,7 +47,6 @@
     
     $table = $this->Html->tableHeaders($headers);
     
-    debug($people);
     $cells = array();
     foreach ($people as $person) {
         $row = array();

@@ -30,10 +30,12 @@ class Person extends AppModel {
      * @return array Options containing conditions and order
      */
     public function searchOptions($search) {
-        $options = array();
+        $options = array(
+            'recursive' => 2
+        );
         
         if (!empty($search['Search'])) {
-            $options = array(
+            $_options = array(
                 'conditions' => array(
                     'Person.full_name LIKE' => "%" . trim($search['Search']) . "%"
                 ),
@@ -41,59 +43,58 @@ class Person extends AppModel {
                     'Person.full_name' => 'ASC'
                 ),
             );
-        }
-        debug($search);
-        switch ($search['Category']) {
-            case 'full_name':
-                $options = array(
-                    'conditions' => array(
-                        'Person.full_name LIKE' => "%$term%"
-                    ),
-                    'order' => array(
-                        'Person.full_name' => 'ASC'
-                    ),
-                    'recursive' => 2
-                );
-                break;
-            case 'position':
-                $options = array(
-                    'conditions' => array(
-                        'Position.title LIKE' => "%$term%"
-                    ),
-                    'order' => array(
-                        'Position.title' => 'ASC'
-                    ),
-                    'model' => 'Position'
-                );
-                break;
-            case 'group':
-                $options = array(
-                    'conditions' => array(
-                        'PositionCategory.title LIKE' => "%$term%"
-                    ),
-                    'order' => array(
-                        'Position.file' => 'ASC'
-                    )
-                );
-                break;
-            default:
-                $options = array(
-                    'conditions' => array(
-                        'OR' => array(
-                            'Person.full_name LIKE' => "%$term%",
-                            'Position.title LIKE' => "%$term%",
-                            'PositionCategory.title LIKE' => "%$term%"
-                        )
-                    ),
-                    'order' => array(
-                        'Person.full_name' => 'ASC'
-                    )
-                );
-                break;
+            $options = array_merge($options, $_options);
         }
         
-        $options['recursive'] = 2;
-        debug($options);
+        if (!empty($search['position'])) {
+            $positions = $this->Position->find('all', array(
+                'contain' => array(
+                    "Person.id"
+                ),
+                'conditions' => array(
+                    'Position.id' => $search['position']
+                ),
+            ));
+            
+            $people_ids = array();
+            foreach ($positions as $position) {
+                foreach ($position['Person'] as $person) {
+                    $people_ids[] = $person['id'];
+                }
+            }
+            
+            $_options = array(
+                'conditions' => array(
+                    'Person.id' => $people_ids
+                )
+            );
+            
+            $options = array_merge_recursive($options, $_options);
+        } elseif (!empty($search['positionCategory'])) {
+            $positions = $this->Position->find('all', array(
+                'contain' => array(
+                    "Person.id"
+                ),
+                'conditions' => array(
+                    'Position.position_category_id' => $search['positionCategory']
+                ),
+            ));
+            
+            $people_ids = array();
+            foreach ($positions as $position) {
+                foreach ($position['Person'] as $person) {
+                    $people_ids[] = $person['id'];
+                }
+            }
+            
+            $_options = array(
+                'conditions' => array(
+                    'Person.id' => $people_ids
+                )
+            );
+            
+            $options = array_merge_recursive($options, $_options);
+        }
         
         return $options;
     }

@@ -24,10 +24,10 @@ class PeopleController extends AppController {
         } else {
             $this->paginate = array('recursive' => 2);
         }
-        debug($this->referer());
+        
         $this->set(array(
             'people' => $this->paginate(),
-            'positions' => $this->Person->Position->displayList(),
+            'positions' => $this->Person->Position->displayList($this->request->data['Person']['positionCategory']),
             'positionCategories' => $this->Person->Position->PositionCategory->displayList()
         ));
     }

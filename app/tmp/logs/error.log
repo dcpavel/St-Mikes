@@ -5391,3 +5391,63 @@
 #8 F:\StMikes\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PeopleController), Object(CakeRequest), Object(CakeResponse))
 #9 F:\StMikes\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #10 {main}
+2012-07-24 02:09:37 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Position.title' in 'where clause'
+#0 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('SELECT `Person`...', Array)
+#2 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('SELECT `Person`...', Array, Array)
+#3 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(1082): DboSource->fetchAll('SELECT `Person`...', false)
+#4 F:\StMikes\lib\Cake\Model\Model.php(2631): DboSource->read(Object(Person), Array)
+#5 F:\StMikes\lib\Cake\Controller\Component\PaginatorComponent.php(173): Model->find('all', Array)
+#6 F:\StMikes\lib\Cake\Controller\Controller.php(1082): PaginatorComponent->paginate(NULL, Array, Array)
+#7 F:\StMikes\app\Controller\PeopleController.php(29): Controller->paginate()
+#8 [internal function]: PeopleController->admin_index()
+#9 F:\StMikes\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PeopleController), Array)
+#10 F:\StMikes\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 F:\StMikes\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PeopleController), Object(CakeRequest), Object(CakeResponse))
+#12 F:\StMikes\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2012-07-24 02:18:25 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'PeoplePosition.position_id' in 'where clause'
+#0 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('SELECT `Person`...', Array)
+#2 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('SELECT `Person`...', Array, Array)
+#3 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(1082): DboSource->fetchAll('SELECT `Person`...', false)
+#4 F:\StMikes\lib\Cake\Model\Model.php(2631): DboSource->read(Object(Person), Array)
+#5 F:\StMikes\app\Model\Person.php(60): Model->find('list', Array)
+#6 F:\StMikes\app\Controller\PeopleController.php(18): Person->searchOptions(Array)
+#7 [internal function]: PeopleController->admin_index()
+#8 F:\StMikes\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PeopleController), Array)
+#9 F:\StMikes\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#10 F:\StMikes\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PeopleController), Object(CakeRequest), Object(CakeResponse))
+#11 F:\StMikes\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2012-07-24 02:26:29 Error: Fatal Error (4): syntax error, unexpected ')' in [F:\StMikes\app\Model\Person.php, line 88]
+2012-07-24 02:26:29 Error: [FatalErrorException] syntax error, unexpected ')'
+#0 F:\StMikes\lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'F:\StMikes\app\...', 88)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'F:\StMikes\app\...', 88, Array)
+#2 F:\StMikes\lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'F:\StMikes\app\...', 88, Array)
+#3 F:\StMikes\lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-24 02:28:59 Error: Fatal Error (1): Unsupported operand types in [F:\StMikes\app\Model\Person.php, line 93]
+2012-07-24 02:28:59 Error: [FatalErrorException] Unsupported operand types
+#0 F:\StMikes\lib\Cake\Error\ErrorHandler.php(162): ErrorHandler::handleFatalError(1, 'Unsupported ope...', 'F:\StMikes\app\...', 93)
+#1 [internal function]: ErrorHandler::handleError(1, 'Unsupported ope...', 'F:\StMikes\app\...', 93, Array)
+#2 F:\StMikes\lib\Cake\Core\App.php(926): call_user_func('ErrorHandler::h...', 1, 'Unsupported ope...', 'F:\StMikes\app\...', 93, Array)
+#3 F:\StMikes\lib\Cake\Core\App.php(899): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2012-07-24 02:48:31 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'array_merge_recursive' at line 1
+#0 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(461): PDOStatement->execute(Array)
+#1 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(427): DboSource->_execute('array_merge_rec...', Array)
+#2 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(671): DboSource->execute('array_merge_rec...', Array, Array)
+#3 F:\StMikes\lib\Cake\Model\Datasource\DboSource.php(613): DboSource->fetchAll('array_merge_rec...', Array, Array)
+#4 F:\StMikes\lib\Cake\Model\Model.php(784): DboSource->query('array_merge_rec...', Array, Object(Person))
+#5 F:\StMikes\app\Model\Person.php(73): Model->__call('array_merge_rec...', Array)
+#6 F:\StMikes\app\Model\Person.php(73): Person->array_merge_recursive(Array, Array)
+#7 F:\StMikes\app\Controller\PeopleController.php(18): Person->searchOptions(Array)
+#8 [internal function]: PeopleController->admin_index()
+#9 F:\StMikes\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(PeopleController), Array)
+#10 F:\StMikes\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#11 F:\StMikes\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(PeopleController), Object(CakeRequest), Object(CakeResponse))
+#12 F:\StMikes\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
