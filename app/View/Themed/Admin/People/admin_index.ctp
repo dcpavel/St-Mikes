@@ -1,19 +1,24 @@
 <div class="search form">
     <?php
-    echo $this->Form->create('People');
+    echo $this->Form->create('Person');
     
-    echo $this->Form->input('Search');
     echo $this->Form->input(
-            'Category',
+            'Search',
             array(
-                'type' => 'radio',
-                'options' => array(
-                    'all' => 'All',
-                    'full_name' => 'Name',
-                    'position' => 'Position',
-                    'group' => 'Group'
-                ),
-                'default' => 'all'
+                'label' => 'Search Name'
+            )
+        );
+    echo $this->Form->input(
+            'positionCategory',
+            array(
+                'empty' => 'All Groups'
+            )
+        );
+    echo "&nbsp;";
+    echo $this->Form->input(
+            'position',
+            array(
+                'empty' => 'All Positions'
             )
         );
     
@@ -32,16 +37,16 @@
     echo $this->Session->flash();
     
     $headers = array(
-        'Status',
-        'Full Name',
+        $this->Paginator->sort('Person.status', 'Status'),
+        $this->Paginator->sort('Person.full_name', 'Full Name'),
         'Position',
         'Group',
-        'Modified',
         'Edit'
     );
     
     $table = $this->Html->tableHeaders($headers);
     
+    debug($people);
     $cells = array();
     foreach ($people as $person) {
         $row = array();
@@ -52,7 +57,7 @@
         
         $image = 'Badge-tick.png';
         $title = "List $name";
-        if ($person['User']['status'] !== true) {
+        if ($person['Person']['status'] !== true) {
             $image = 'Badge-multiply.png';
             $title = "Delist $name";
         }
@@ -72,8 +77,8 @@
                 )
             );
         $row[] = $name;
-        $row[] = $person['Position']['title'];
-        $row[] = $person['PositionCategory']['title'];
+        $row[] = $person['Position'][0]['title'];
+        $row[] = $person['Position'][0]['PositionCategory']['title'];
         
         $row[] = $this->Html->link(
                 $this->Html->image(
@@ -84,7 +89,7 @@
                         )
                     ),
                 array(
-                    'controller' => 'users',
+                    'controller' => 'people',
                     'action' => 'admin_edit',
                     $id
                 )
@@ -112,3 +117,22 @@
         );
     ?>
 </div>
+<?php
+$this->Js->get('#PersonPositionCategory')->event(
+        'change',
+        $this->Js->request(
+                array('controller' => 'positions', 'action' => 'get_positions', 'admin' => false),
+                array(
+                    'async' => true,
+                    'update' => '#PersonPosition',
+                    'dataExpression' => true,
+                    'method' => 'post',
+                    'data' => $this->Js->serializeForm(array(
+                        'isForm' => true,
+                        'inline' => true
+                        )
+                    )
+                )
+            )
+    );
+?>

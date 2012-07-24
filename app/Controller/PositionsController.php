@@ -43,6 +43,7 @@ class PositionsController extends AppController {
         $this->layout = 'ajax';
         
         $this->set(array(
+            'referer' => $this->referer(),
             'positions' => $this->Position->displayList($this->request->data['Person']['positionCategory'])
         ));
     }

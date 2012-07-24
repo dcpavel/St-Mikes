@@ -6,19 +6,35 @@
 class PeopleController extends AppController {
     public $name = 'People';
     
+    public $actsAs = array('Containable');
+    
     public function beforeFilter() {
         parent::beforeFilter();
     }
     
     public function admin_index() {
+        $model = 'Person';
+        if ($this->request->is('post')) {
+            $options = $this->Person->searchOptions($this->request->data['Person']);
+            if (!empty($options['model'])) {
+                $model = $options['model'];
+                unset($options['model']);
+            }
+            $this->paginate = $options;
+        } else {
+            $this->paginate = array('recursive' => 2);
+        }
+        debug($this->referer());
         $this->set(array(
-            'people' => $this->paginate()
+            'people' => $this->paginate(),
+            'positions' => $this->Person->Position->displayList(),
+            'positionCategories' => $this->Person->Position->PositionCategory->displayList()
         ));
     }
     
     public function admin_edit($id = null) {
         if ($this->request->is('get')) {
-            $this->Person->findById($id);
+            $this->request->data = $this->Person->findById($id);
         } else {
             if ($this->Person->saveAll($this->request->data)) {
                 $this->Session->setFlash('Person saved');

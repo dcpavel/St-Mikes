@@ -7,6 +7,8 @@
 class Position extends AppModel {
     public $name = 'Position';
     
+    public $actsAs = array('Containable');
+    
     public $belongsTo = array('PositionCategory');
     public $hasAndBelongsToMany = array('Person');
     
@@ -63,7 +65,7 @@ class Position extends AppModel {
             'recursive' => 0
         );
         
-        if (!is_null($category_id)) {
+        if (!empty($category_id)) {
             $options['conditions']['PositionCategory.id'] = $category_id;
         }
         

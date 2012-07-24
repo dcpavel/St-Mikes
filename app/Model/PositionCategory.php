@@ -6,6 +6,8 @@
 class PositionCategory extends AppModel {
     public $name = 'PositionCategory';
     
+    public $actsAs = array('Containable');
+    
     public $hasMany = array('Position');
     
     public $validate = array(

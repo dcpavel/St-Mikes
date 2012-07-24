@@ -626,6 +626,18 @@ header .no-js ul li:hover ul {
     border-bottom: 2px solid #766A62;
 }
 
+a.asc:after {
+    display: block;
+    content: url('/img/Up-indicator.png');
+    padding-left: 10px;
+}
+
+a.desc:after {
+    display: block;
+    content: url('/img/Down-indicator.png');
+    padding-left: 10px;
+}
+
 .table th img, .table td img {
     max-height: 20px;
     max-width: 20px;

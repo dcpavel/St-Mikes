@@ -38,7 +38,7 @@ echo $this->Html->script(array('jquery-ui-1.8.17.custom.min'), array('inline' =>
     echo $this->Form->input('title');
     echo $this->Form->hidden('id');
     
-    echo $this->Form->input('calendar');
+    echo $this->Form->input('calendar_id');
     
     echo $this->Form->input(
             'start_date',
