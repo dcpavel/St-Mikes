@@ -19,7 +19,7 @@ class User extends AppModel {
         ),
         'role' => array(
             'valid' => array(
-                'rule' => array('inList', array('admin', 'author', 'uploader')),
+                'rule' => array('inList', array('admin')),
                 'message' => 'Please select a valid role',
                 'allowEmpty' => false
             )
@@ -47,8 +47,8 @@ class User extends AppModel {
     public function roles() {
         return array(
             'admin' => 'Administrator (full access)',
-            'author' => 'Author (can change text and upload)',
-            'uploader' => 'Uploader (can only upload files)'
+//            'author' => 'Author (can change text and upload)',
+//            'uploader' => 'Uploader (can only upload files)'
         );
     }
 }
